@@ -7,8 +7,8 @@ class Index extends Controller
 {
     public function index()
     {
-		// return phpinfo();
-		return false;
+        return 'Xia,I Love You';
     }
+
 
 }
