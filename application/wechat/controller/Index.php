@@ -12,18 +12,22 @@ class Index extends Controller
 
 	public function index()
 	{
+
 		if(!$this->checkSign()){
 			Log::error('验证签名失败');
 			return false;
 		}
 		if(input('?get.echostr')){
-			echo input(input('?get.echostr'));
+			echo input('get.echostr');
 			exit();
 		}
 
-		$this->handleData();		
+		$obj = $this->handleData();		
 
-		// $this->response();
+		if(!$obj) return false;
+
+		
+
 	}
 
 	public function handleData()
@@ -35,11 +39,10 @@ class Index extends Controller
 
 		if(FALSE === $ret){
 			Log::error('接收微信推送数据并解析失败. 数据: '.$ret);
-			echo '';
-			exit();
+			return false;
 		}
 
-		print_r($ret);die;
+		return json_encode($ret);
 
 	}
 

@@ -1,12 +1,42 @@
 <?php
-// +----------------------------------------------------------------------
-// | ThinkPHP [ WE CAN DO IT JUST THINK ]
-// +----------------------------------------------------------------------
-// | Copyright (c) 2006-2016 http://thinkphp.cn All rights reserved.
-// +----------------------------------------------------------------------
-// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
-// +----------------------------------------------------------------------
-// | Author: 流年 <liu21st@gmail.com>
-// +----------------------------------------------------------------------
+/**
+ * 应用公共文件
+ *
+ * X-wolf
+ *
+ * 2017/9/21
+ */
 
-// 应用公共文件
+// 友好输出
+if(!function_exists('p')){
+	function p($value,$is_die = true)
+	{
+		echo '<pre>';
+		print_r($value);
+		echo '</pre>';
+		$is_die && die();
+	}
+}
+// 普通输出
+if(!function_exists('e')){
+	function e($value,$is_die = true)
+	{
+		echo $value;
+		$is_die && die();
+	}
+}
+
+// 错误输出
+if(!function_exists('error')){
+	function error(){
+
+	}
+}
+
+// 正确输出
+if(!function_exists('success')){
+	function success()
+	{
+
+	}
+}

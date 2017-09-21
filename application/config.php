@@ -1,13 +1,9 @@
 <?php
-// +----------------------------------------------------------------------
-// | ThinkPHP [ WE CAN DO IT JUST THINK ]
-// +----------------------------------------------------------------------
-// | Copyright (c) 2006~2016 http://thinkphp.cn All rights reserved.
-// +----------------------------------------------------------------------
-// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
-// +----------------------------------------------------------------------
-// | Author: liu21st <liu21st@gmail.com>
-// +----------------------------------------------------------------------
+/**
+ * X-wolf
+ *
+ * 2017/9/21
+ */
 
 return [
     // +----------------------------------------------------------------------
@@ -17,9 +13,9 @@ return [
     // 应用命名空间
     'app_namespace'          => 'app',
     // 应用调试模式
-    'app_debug'              => true,
+    'app_debug'              => DEBUG,
     // 应用Trace
-    'app_trace'              => true,
+    'app_trace'              => DEBUG,
     // 应用模式状态
     'app_status'             => '',
     // 是否支持多模块
@@ -239,9 +235,4 @@ return [
         'list_rows' => 15,
     ],
 
-    'wechat'        =>      [
-        'encode_aes_key'    => 'e7E5oMQAL4S5k7D8iXrCHXyVAnQVtNsAdsiyY9NHbnN',
-        'token'             => '4d2ebe3ccea2656032c16de490d2d339',
-
-    ],
 ];
