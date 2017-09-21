@@ -17,10 +17,36 @@ class Index extends Controller
 			return false;
 		}
 		if(input('?get.echostr')){
-			return input('get.echostr');
+			echo input(input('?get.echostr'));
+			exit();
 		}
-		echo '调用其他事件';
+
+		$this->handleData();		
+
+		// $this->response();
 	}
+
+	public function handleData()
+	{
+		
+		$data = file_get_contents('php://input');
+
+		$ret = simplexml_load_string($data,'SimpleXMLElement',LIBXML_NOCDATA | LIBXML_NOBLANKS);
+
+		if(FALSE === $ret){
+			Log::error('接收微信推送数据并解析失败. 数据: '.$ret);
+			echo '';
+			exit();
+		}
+
+		print_r($ret);die;
+
+	}
+
+	public function response()
+    {
+
+    }
 
 	private function checkSign()
 	{
