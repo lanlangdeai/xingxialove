@@ -9,16 +9,17 @@ use app\wechat\logic\Base as BaseLogic;
 /**
  * 微信相关接口
  */
-class Index extends Controller
+class Index extends Common
 {
 	//统一入口
 	public function index()
 	{
-
+        Log::info('调试信息: '.json_encode(input('get')));
 		if(!BaseLogic::checkSign()){
 			Log::error('验证签名失败');
 			return false;
 		}
+
 		if(input('?get.echostr')){
 			echo input('get.echostr');
 			exit();

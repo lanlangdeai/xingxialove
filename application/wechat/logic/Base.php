@@ -19,8 +19,8 @@ class Base extends Common
 			Log::error('接收微信推送数据并解析失败. 数据: '.$ret);
 			return false;
 		}
-
-		return json_encode($ret);
+		Log::info('数据解析成功. '.json_encode($ret));
+		return json_decode(json_encode($ret));
 
 	}
 
@@ -31,7 +31,7 @@ class Base extends Common
     }
 
     //验证签名
-	private static function checkSign()
+	public static function checkSign()
 	{
 		if( !(input('?get.signature') && input('?get.timestamp') && input('?get.nonce'))) return false;
 
