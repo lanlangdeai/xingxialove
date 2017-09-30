@@ -11,7 +11,9 @@ return [
 	'wechat'        =>      [
         'encode_aes_key'    => 'e7E5oMQAL4S5k7D8iXrCHXyVAnQVtNsAdsiyY9NHbnN',
         'token'             => '4d2ebe3ccea2656032c16de490d2d339',
-
+    ],
+    'keys'			=>		[
+    	'access_token'	=> 'accessToken',
     ],
     
 ];

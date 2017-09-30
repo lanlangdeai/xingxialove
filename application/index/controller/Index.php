@@ -1,14 +1,15 @@
 <?php
 namespace app\index\controller;
 
-use think\Controller;
+use app\common\Common;
 
-class Index extends Controller
+class Index extends Common
 {
     public function index()
     {
         return 'Xia,I Love You';
     }
+
 
 
 }

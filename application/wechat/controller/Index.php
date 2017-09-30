@@ -2,18 +2,20 @@
 
 namespace app\wechat\controller;
 
-use think\Controller;
+use app\common\Common;
 use think\Log;
+use lib\Util;
+use app\wechat\logic\Base as BaseLogic;
 /**
  * 微信相关接口
  */
 class Index extends Controller
 {
-
+	//统一入口
 	public function index()
 	{
 
-		if(!$this->checkSign()){
+		if(!BaseLogic::checkSign()){
 			Log::error('验证签名失败');
 			return false;
 		}
@@ -22,49 +24,91 @@ class Index extends Controller
 			exit();
 		}
 
-		$obj = $this->handleData();		
+		$obj = BaseLogic::handleData();		
 
 		if(!$obj) return false;
 
-		
+		$this->response($obj);
 
 	}
 
-	public function handleData()
-	{
-		
-		$data = file_get_contents('php://input');
+	// 事件处理
+	public function response($obj)
+    {
+    	switch ($obj->MsgType) {
+    		case 'text':
+    			$this->responseText($obj);
+    			break;
+    		case 'image':
+    			$this->responseImg($obj);
+    			break;
+    		case 'voice':
+    			$this->responseVoice($obj);
+    			break;
+    		case 'video':
+    			$this->responsevideo($obj);
+    			break;
+    		case 'shortvideo':
+    			$this->responseShortvideo($obj);
+    			break;
+			case 'location':
+    			$this->responseLocation($obj);
+    			break;
+    		case 'link':
+    			$this->responseLink($obj);
+    			break;
+    		case 'event':
+    			$this->responseEvent($obj);
+    			break;
+    		
+    		default:
+    			# code...
+    			break;
+    	}
+    }
+    // 文本消息
+    private function responseText()
+    {
 
-		$ret = simplexml_load_string($data,'SimpleXMLElement',LIBXML_NOCDATA | LIBXML_NOBLANKS);
+    }
+    // 图片消息
+    private function responseImg()
+    {
 
-		if(FALSE === $ret){
-			Log::error('接收微信推送数据并解析失败. 数据: '.$ret);
-			return false;
-		}
+    }
+    // 语音消息
+    private function responseVoice()
+    {
 
-		return json_encode($ret);
+    }
+    // 视频消息
+    private function responseVideo()
+    {
 
-	}
+    }  
+    // 小视频消息
+    private function responseShortvideo()
+    {
 
-	public function response()
+    } 
+
+    // 地理位置消息
+    private function responseLocation()
+    {
+
+    }   
+    // 地理位置消息
+    private function responseLink()
     {
 
     }
 
-	private function checkSign()
-	{
-		if( !(input('?get.signature') && input('?get.timestamp') && input('?get.nonce'))) return false;
+    private function responseEvent()
+    {
 
-		$data = [
-			input('get.timestamp'),
-			input('get.nonce'),
-			config('wechat.token')
-		]; 
-		
-		sort($data,SORT_STRING);
+    }
 
-		return input('get.signature') == sha1(implode($data));
-	}
+
 }
 
 
