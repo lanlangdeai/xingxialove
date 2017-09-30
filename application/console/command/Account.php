@@ -23,6 +23,6 @@ class Account extends Command
 	{
 		$ret = AccountModel::add($this->appId,$this->appSecret);
 
-		echo $ret ? 'success' : 'failure';
+		echo $ret ? 'Add account success' : 'Add account failure';
 	}
 }

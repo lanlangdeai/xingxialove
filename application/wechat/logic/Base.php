@@ -2,12 +2,17 @@
 namespace app\wechat\logic;
 
 use app\common\controller\Common;
+use app\wechat\model\Account as AccountModel;
+use lib\Util;
 /**
  * 所有微信模块下的Logic处理基类
  */
 class Base extends Common
 {
-		//数据处理
+
+	const EXPIRE_IN = 7100;
+
+	//数据处理
 	public static function handleData()
 	{
 		
@@ -24,11 +29,6 @@ class Base extends Common
 
 	}
 
-    // 获取access_token
-    private function getAccessToken($appId,$appSecret)
-    {
-    	
-    }
 
     //验证签名
 	public static function checkSign()
@@ -45,4 +45,31 @@ class Base extends Common
 
 		return input('get.signature') == sha1(implode($data));
 	}
+
+	// 获取access_token
+    public static function getAccessToken()
+    {
+    	return Cache::get(config('keys.access_token')) ? : self::setAccessToken();
+    }
+    // 生成access_token
+    public static function setAccessToken()
+    {
+    	$app_secret = AccountModel::get(config('wechat_appid'));
+
+    	$access_token = self::generateAccessToken(config('wechat_appid') , $app_secret);
+    	
+    	return $access_token ? Cache::set(config('keys.access_token'),$access_token,self::EXPIRE_IN) : '';
+    }
+    // 调取access_token
+    private function generateAccessToken($appId,$appSecret)
+    {
+    	$api = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s';
+
+    	$url = sprintf($api,$appId,$appSecret);
+
+    	$ret = json_decode(json_encode(Util::urlGet($url)),true);
+
+    	return isset($ret['access_token']) ? $ret['access_token'] : '';
+    }
+
 }

@@ -8,4 +8,5 @@
  */
 return [
 	'app\console\command\Account',
+	'app\console\command\Menu',
 ];

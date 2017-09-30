@@ -15,6 +15,14 @@ class Test extends Common
 	{
 		dump($_SERVER);
 	}
+
+	public function cache()
+	{
+		$name = 'name';
+		
+		$value = 'xing';
+
+	}
 }
 
 
