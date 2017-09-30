@@ -2,7 +2,7 @@
 
 namespace app\wechat\controller;
 
-use app\common\Common;
+use app\common\controller\Common;
 use think\Log;
 use lib\Util;
 use app\wechat\logic\Base as BaseLogic;
