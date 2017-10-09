@@ -4,6 +4,7 @@ namespace app\wechat\logic;
 use app\common\controller\Common;
 use app\wechat\model\Account as AccountModel;
 use lib\Util;
+use think\Cache;
 /**
  * 所有微信模块下的Logic处理基类
  */

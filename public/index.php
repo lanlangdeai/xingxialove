@@ -11,6 +11,7 @@
 // 配置本地  线上环境  1－测试　２－正式
 define('APP_ENV',$_SERVER['HTTP_HOST'] == 'xingxialove.cn' ? 2 : 1 );
 
+define('NOW',time());
 
 define('DEBUG',true);
 

@@ -68,43 +68,67 @@ class Index extends Common
     	}
     }
     // 文本消息
-    private function responseText()
+    private function responseText($obj)
     {
-
+        switch ($obj->Content) {
+            case 'hello':
+                $content = 'Hi!';
+                break;
+            case 'love':
+                $content = 'Congratulate';
+                break;
+            default:
+                $content = '暂无此关键词相关信息,请试试其他词汇哦.例如:hello,love...';
+                break;
+        }
+        $fromUserName = $obj->ToUserName;
+        $toUserName   = $obj->FromUserName;
+        $createTime   = NOW;
+        $msgType      = strtolower($obj->MsgType);
+        $template = '<xml>
+                        <ToUserName><![CDATA[%s]]></ToUserName>
+                        <FromUserName><![CDATA[%s]]></FromUserName>
+                        <CreateTime>%s</CreateTime>
+                        <MsgType><![CDATA[%s]]></MsgType>
+                        <Content><![CDATA[%s]]></Content>
+                    </xml>
+                    ';
+        $result = sprintf($template,$toUserName,$fromUserName,$createTime,$msgType,$content);
+        e($result);
     }
     // 图片消息
-    private function responseImg()
+    private function responseImg($obj)
     {
 
     }
     // 语音消息
-    private function responseVoice()
+    private function responseVoice($obj)
     {
 
     }
     // 视频消息
-    private function responseVideo()
+    private function responseVideo($obj)
     {
 
     }  
     // 小视频消息
-    private function responseShortvideo()
+    private function responseShortvideo($obj)
     {
 
     } 
 
     // 地理位置消息
-    private function responseLocation()
+    private function responseLocation($obj)
     {
 
     }   
     // 地理位置消息
-    private function responseLink()
+    private function responseLink($obj)
     {
 
     }
 
-    private function responseEvent()
+    private function responseEvent($obj)
     {
 
     }

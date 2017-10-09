@@ -2,6 +2,7 @@
 namespace app\index\controller;
 
 use app\common\controller\Common;
+use think\Cache;
 /**
  * 相关测试功能
  */
@@ -22,6 +23,12 @@ class Test extends Common
 		
 		$value = 'xing';
 
+		echo Cache::get($name);
+	}
+
+	public function time()
+	{
+		echo NOW;
 	}
 }
 
