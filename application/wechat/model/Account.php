@@ -28,11 +28,11 @@ class Account extends Common
 		return $ret ? true : false; 
 	}
 	//获取数据
-	public static function get($appid)
+	public static function getSecret($appid)
 	{
 		if(!$appid) return false;
 
-		$acount = Account::get(['app_id'=>$appid]);
+		$account = Account::get(['app_id'=>$appid]);
 
 		return $account ? $account->app_secret : '';
 	}

@@ -55,7 +55,7 @@ class Base extends Common
     // 生成access_token
     public static function setAccessToken()
     {
-    	$app_secret = AccountModel::get(config('wechat_appid'));
+    	$app_secret = AccountModel::getSecret(config('wechat_appid'));
 
     	$access_token = self::generateAccessToken(config('wechat_appid') , $app_secret);
     	
