@@ -23,7 +23,7 @@ class Menu extends Common
 
 		return self::doCreate($accessToken,$menu);
 	}
-	//菜单创建
+	
 	private static function doCreate($accessToken , $menu)
 	{
 		$api = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token=';

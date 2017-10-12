@@ -1,5 +1,4 @@
 <?php 
-
 namespace app\wechat\controller;
 
 use app\common\controller\Common;

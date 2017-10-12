@@ -63,7 +63,7 @@ class Base extends Common
     	return $access_token ? Cache::set(config('keys.access_token'),$access_token,self::EXPIRE_IN) : '';
     }
     // 调取access_token
-    private function generateAccessToken($appId,$appSecret)
+    private static function generateAccessToken($appId,$appSecret)
     {
     	$api = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=%s&secret=%s';
 

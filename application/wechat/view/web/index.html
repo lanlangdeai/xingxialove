@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>微信网页功能</title>
+</head>
+<body>
+	<h1>网页功能</h1>
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script>
+	// 验证成功之后 执行ready 中方法
+	wx.config({
+	    debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+	    appId: '{$data.appId}', // 必填，公众号的唯一标识
+	    timestamp: '{$data.timestamp}', // 必填，生成签名的时间戳
+	    nonceStr: '{$data.nonceStr}', // 必填，生成签名的随机串
+	    signature: '{$data.signature}',// 必填，签名，见附录1
+	    jsApiList: [] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+	});
+</script>
+<script>
+	//加载完成 立即调用方法
+	wx.ready(function(){
+		//判断是否支持指定js
+		wx.checkJsApi({
+		    jsApiList: ['chooseImage'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
+		    success: function(res) {
+		    	console.log(res);
+		        // 以键值对的形式返回，可用的api值true，不可用为false
+		        // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
+		    }
+		});
+	});
+	// 微信config验证失败执行
+	wx.error(function(){
+
+	});
+</script>
+</body>
+</html>

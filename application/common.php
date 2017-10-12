@@ -40,3 +40,35 @@ if(!function_exists('success')){
 
 	}
 }
+// 生成签名
+if(!function_exists('generateSign')){
+	function generateSign($data = [])
+	{
+		if(!$data || !isAssocArr($data)) return false;
+		$sign = [];
+		asort($data);
+		foreach($data as $k=>$v){
+			$sign[] = $k.'='.$v;
+		}
+		return sha1(implode('&',$sign));
+	}
+}
+// 生成随机数
+if(!function_exists('generateRandStr')){
+	function generateRandStr()
+	{
+		$chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	    $str = "";
+	    for ($i = 0; $i < $length; $i++) {
+	      $str .= substr($chars, mt_rand(0, strlen($chars) - 1), 1);
+	    }
+	    return $str;
+	}
+}
+// 是否是关联数组
+if(!function_exists('isAssocArr')){
+	function isAssocArr($arr)
+	{
+		return array_diff_assoc(array_keys($arr), range(0,sizeof($arr))) ? true : false;
+	}
+}
