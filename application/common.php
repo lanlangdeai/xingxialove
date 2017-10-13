@@ -55,7 +55,7 @@ if(!function_exists('generateSign')){
 }
 // 生成随机数
 if(!function_exists('generateRandStr')){
-	function generateRandStr()
+	function generateRandStr($length = 16)
 	{
 		$chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 	    $str = "";

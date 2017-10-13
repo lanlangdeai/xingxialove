@@ -12,11 +12,11 @@ class Web
 	//获取js-sdk相关配置信息 可将信息进行序列化处理
 	public function jsSdk()
 	{
-		$jsapiTicket = $this->getJsApiTicket();
+		$ticket = $this->getJsApiTicket();
 
 		// 动态获取
 		$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' || $_SERVER['SERVER_PORT'] == 443 ) ? 'https://' : 'http://';
-		$url = "$protocol$_SERVER['HTTP_HOST']$_SERVER['REQUEST_URI']";
+		$url = "$protocol$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
 		$timestamp = time();
 		$nonceStr = generateRandStr();
@@ -33,13 +33,15 @@ class Web
 		return $data;
 	}
 	// 获取jsapi-ticket(7200)
-	private static function getJsApiTicket()
+	private function getJsApiTicket()
 	{
 		$key = config('keys.jsapi_ticket');
 		$ticket = Cache::get($key); 
+		// echo $ticket;die;
 		if(!$ticket){
 			$accessToken = Base::getAccessToken();
 			$ticket = $this->getTicket($accessToken);
+			echo $ticket;die;
 			if(!$ticket) return false; //获取ticket失败
 			Cache::set($key,$ticket,self::JSAPI_TICKET_EXPIRE_IN);
 		}
@@ -50,7 +52,9 @@ class Web
 	{
 		$api = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=%s&type=jsapi';
 		$url = sprintf($api,$accessToken);
-		$data = json_decode(Util::http_get($url));
+		$data = Util::http_get($url);
+		// $data = json_decode();
+		dump($data);die;
 		return isset($data->ticket) ? $data->ticket : '';
 	}
 }

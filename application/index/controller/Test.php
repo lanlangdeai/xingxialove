@@ -10,6 +10,50 @@ use app\index\model\Test as TestModel;
  */
 class Test extends Common
 {
+	public function table()
+	{
+		$table = 'message';
+		$userId = 'user18991';
+		// $ret = $this->doHash($table,$userId);
+		// echo $ret;
+		$user = 30;
+		$total = 4;
+		// echo $this->hash_table($table,$user,$total);
+		echo $this->get_hash($user);
+	}
+
+	// hash分表
+	public function doHash($table,$userid)
+	{
+		 $str = crc32($userid);  
+		 if($str<0){  
+			 $hash = "0".substr(abs($str), 0, 1);  
+		 }else{  
+			 $hash = substr($str, 0, 2);  
+		 }  
+		  
+		 return $table."_".$hash;
+	}
+	// hash 算法  位数规定
+	public function get_hash($id){
+		$str = bin2hex($id);
+		$hash = substr($str, 0, 4);
+		if (strlen($hash)<4){
+		$hash = str_pad($hash, 4, "0");
+		}
+		return $hash;
+	}
+	/**
+	 * 取模分表
+	 * @param  [type] $table_name 表名
+	 * @param  [type] $user_id    用户id
+	 * @param  [type] $total      分表总数量
+	 */
+	public function hash_table($table_name,$user_id,$total)
+	{
+		return $table_name.'_'.(($user_id % $total) + 1);
+	}
+
 	public function phpinfo()
 	{
 		echo phpinfo();
