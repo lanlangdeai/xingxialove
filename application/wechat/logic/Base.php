@@ -69,7 +69,7 @@ class Base extends Common
 
     	$url = sprintf($api,$appId,$appSecret);
 
-    	$ret = json_decode(json_encode(Util::urlGet($url)),true);
+    	$ret = json_decode(Util::urlGet($url),true);
 
     	return isset($ret['access_token']) ? $ret['access_token'] : '';
     }

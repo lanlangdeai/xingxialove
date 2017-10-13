@@ -37,11 +37,9 @@ class Web
 	{
 		$key = config('keys.jsapi_ticket');
 		$ticket = Cache::get($key); 
-		// echo $ticket;die;
 		if(!$ticket){
 			$accessToken = Base::getAccessToken();
 			$ticket = $this->getTicket($accessToken);
-			echo $ticket;die;
 			if(!$ticket) return false; //获取ticket失败
 			Cache::set($key,$ticket,self::JSAPI_TICKET_EXPIRE_IN);
 		}
@@ -52,9 +50,7 @@ class Web
 	{
 		$api = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=%s&type=jsapi';
 		$url = sprintf($api,$accessToken);
-		$data = Util::http_get($url);
-		// $data = json_decode();
-		dump($data);die;
+		$data = json_decode(Util::http_get($url));
 		return isset($data->ticket) ? $data->ticket : '';
 	}
 }
