@@ -13,7 +13,7 @@ class Web
 	public function jsSdk()
 	{
 		$ticket = $this->getJsApiTicket();
-
+		$ticket = 'HoagFKDcsGMVCIY2vOjf9n8hrde0I1ZhqT6aHh9Ij7YqytXCGcsbdDQCqshJ_j1XM1SIpbNAdkR_W2FLP4g1IQ';
 		// 动态获取
 		$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' || $_SERVER['SERVER_PORT'] == 443 ) ? 'https://' : 'http://';
 		$url = "$protocol$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
@@ -26,7 +26,7 @@ class Web
 			'timestamp'		=> 	$timestamp,
 			'url'			=> 	$url
 		];
-		$signature = generateSign($data);
+		$signature = generateSign($data);  
 		unset($data);
 		$data = compact('nonceStr','timestamp','url','signature');
 		$data['appId'] = config('wechat.app_id');

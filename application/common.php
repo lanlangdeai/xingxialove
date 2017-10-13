@@ -46,7 +46,7 @@ if(!function_exists('generateSign')){
 	{
 		if(!$data || !isAssocArr($data)) return false;
 		$sign = [];
-		asort($data);
+		ksort($data); //根据键名进行ASCII 排序
 		foreach($data as $k=>$v){
 			$sign[] = $k.'='.$v;
 		}
